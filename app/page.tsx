@@ -1,65 +1,94 @@
-import Image from "next/image";
+import RegForm from "@/components/RegForm";
+import Link from "next/link";
+import AdPlaceholder from "@/components/AdPlaceholder";
+import { listPopularVehicles } from "@/lib/vehicle-lookup";
+import { DATABASE_URL } from "@/lib/env";
 
-export default function Home() {
+export default async function Home() {
+  const popular = await listPopularVehicles(12);
+  const usingDemo = !DATABASE_URL;
+
+  const demoRegs = ["AB12CDE", "BX15KLM", "DE68FNP", "GV17XYZ", "LC65MNO"];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <>
+      {/* Hero */}
+      <section className="pt-10 pb-8 text-center">
+        <div className="mx-auto max-w-3xl">
+          <div className="inline-block rounded-full bg-emerald-600/10 px-3 py-1 text-xs font-bold tracking-[2px] text-emerald-700">
+            UK CAR BATTERY FINDER
+          </div>
+          <h1 className="mt-4 text-5xl font-black tracking-tighter sm:text-6xl">
+            Find the <span className="text-emerald-600">right battery</span><br />for your car.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mx-auto mt-4 max-w-md text-xl text-ink/70">
+            Enter your registration. We check start/stop, engine, polarity, dimensions, Ah and CCA.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="mt-8">
+          <RegForm />
         </div>
-      </main>
-    </div>
+
+        <div className="mt-3 text-xs text-ink/50">
+          Try demo: {demoRegs.map((r, i) => (
+            <Link key={i} href={`/results?reg=${r}`} className="mx-1 underline hover:text-emerald-600">{r}</Link>
+          ))}
+        </div>
+
+        {usingDemo && (
+          <div className="mx-auto mt-4 max-w-xl rounded-xl border border-amber-400/40 bg-amber-50 px-4 py-2 text-xs text-amber-800">
+            Running in <strong>demo mode</strong> (no database connected). Full reg search + matching works with sample data.
+            Set <code>DATABASE_URL</code> in <code>.env.local</code> + run <code>npm run db:setup && npm run db:seed</code> for your own data.
+          </div>
+        )}
+      </section>
+
+      {/* Trust / considerations */}
+      <section className="grid gap-4 pb-8 sm:grid-cols-3">
+        {[
+          { title: "Start / Stop", desc: "We prefer EFB or AGM for vehicles with auto stop/start." },
+          { title: "Polarity & Size", desc: "Terminal position + exact tray dimensions to ensure it physically fits." },
+          { title: "Power & Capacity", desc: "Ah and CCA at least as good as the original specification." },
+        ].map((f, idx) => (
+          <div key={idx} className="card text-center">
+            <div className="font-semibold">{f.title}</div>
+            <p className="mt-1 text-sm text-ink/70">{f.desc}</p>
+          </div>
+        ))}
+      </section>
+
+      {/* Popular vehicles */}
+      {popular.length > 0 && (
+        <section className="pb-10">
+          <div className="mb-3 flex items-baseline justify-between">
+            <h2 className="font-semibold tracking-tight">Popular vehicles {usingDemo ? "(demo data)" : ""}</h2>
+            <Link href="/batteries" className="text-sm text-emerald-600 hover:underline">Browse all batteries →</Link>
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+            {popular.slice(0, 8).map((v: any) => (
+              <Link
+                key={v.id}
+                href={`/results?reg=${encodeURIComponent(v.slug)}`}
+                className="card hover:-translate-y-px hover:shadow"
+              >
+                <div className="font-bold">{v.make} {v.model}</div>
+                <div className="text-sm text-ink/60">{v.variant} • {v.yearFrom}-{v.yearTo}</div>
+                {v.startStop && <span className="mt-1 inline-block pill badge-fit text-[10px]">s/s</span>}
+              </Link>
+            ))}
+          </div>
+          <p className="mt-3 text-center text-[11px] text-ink/50">Exact reg match is best. Manual vehicle selection coming soon.</p>
+        </section>
+      )}
+
+      {/* Adsterra ad placement — replace <AdPlaceholder /> below with real ad code */}
+      <AdPlaceholder label="Adsterra — homepage banner or native placement" />
+
+      {/* Disclaimer teaser */}
+      <div className="disclaimer mt-4">
+        <strong>Important:</strong> CarBat is a guide only. Battery fitment depends on exact options, modifications, and market. Always confirm with your handbook and the retailer. You are responsible for the final choice.
+      </div>
+    </>
   );
 }
