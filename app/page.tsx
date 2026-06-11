@@ -86,9 +86,18 @@ export default async function Home() {
         </section>
       )}
 
-      {/* === ADSTERRA: Replace with your real zone code === */}
+      {/* === ADSTERRA: 728x90 Banner === */}
       <AdsterraAd
-        label="Adsterra — homepage banner / native (high value placement)"
+        rawHtml={`<script>
+  atOptions = {
+    'key' : 'e0b160958619964e1c2785d924d48bd4',
+    'format' : 'iframe',
+    'height' : 90,
+    'width' : 728,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/e0b160958619964e1c2785d924d48bd4/invoke.js"></script>`}
         minHeight={100}
       />
 

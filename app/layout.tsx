@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import Script from "next/script";
 import "./globals.css";
 import { getSiteUrl } from "@/lib/site-url";
 
@@ -67,8 +68,25 @@ export default function RootLayout({
             <p className="mt-3 text-xs">
               This site is for guidance only. Always double-check specifications against your vehicle handbook and with the retailer before purchase. Incorrect batteries can cause damage or electrical issues.
             </p>
+            {/* Adsterra Smartlink - small sponsored */}
+            <div className="mt-2 text-[10px] text-ink/40">
+              Sponsored: <a href="https://www.effectivecpmnetwork.com/rbtpfyvk0?key=71a39c70e260b4a78cd99e29eae84f78" target="_blank" rel="noopener" className="underline hover:text-cyan-400">Check offers</a>
+            </div>
           </div>
         </footer>
+
+        {/* 
+          ADSTERRA INTEGRATION - Popunder (global)
+        */}
+        <Script
+          src="https://pl29715844.effectivecpmnetwork.com/4a/ec/26/4aec2694677c41c919a52cbbd82d4b35.js"
+          strategy="lazyOnload"
+        />
+        {/* Adsterra Social Bar (global) */}
+        <Script
+          src="https://pl29715845.effectivecpmnetwork.com/28/d3/b1/28d3b1df101fd8436015fa3550d10bd5.js"
+          strategy="lazyOnload"
+        />
 
         {/* 
           ADSTERRA INTEGRATION

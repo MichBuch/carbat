@@ -28,3 +28,47 @@ Theme now matches your preferred holdingco neon sparky cyan dark aesthetic while
 Next: if you share your specific reg or want even more batteries added to catalogue, or Adsterra wiring for revenue, say the word.
 
 Log updated.
+=== Update - 11 June 2026 (Neon UI push confirmation + Adsterra website added + Prod still old) ===
+
+User showed production screenshot:
+- Still seeing the old light theme: light gradient background, white/light cards, green (emerald) accents, old-style WIP banner, old popular vehicles section.
+- Header "carbat" with green "bat".
+- Confirms the neon dark sparky UI (dark slate, cyan neon glows, cyan accents) is not live yet.
+
+Actions taken:
+- Confirmed via git log that the neon UI changes were pushed:
+  - Commit 240ec97: "feat: neon dark sparky UI (holdingco-inspired cyan glows, dark slate), price ranges on batteries, price sort, increased results limit to 48. Adsterra slots ready."
+  - Follow-up 249c8d2: "fix: update AdsterraAd wrapper for dark neon theme compatibility"
+- All previous build fixes (drizzle-kit, @types/pg, dotenv cleanups) were already in.
+- User was instructed to manually redeploy in Vercel (Deployments tab -> Redeploy) because Vercel does not always auto-build on every push.
+- Explained the disconnect: code is in GitHub, but prod is serving an older deployment from before the neon + prices overhaul.
+- Hard refresh (Ctrl+Shift+R) recommended after redeploy.
+
+Adsterra progress (user logged in):
+- User reached "Add new Website" screen in Adsterra.
+- Entered: https://carbat.vercel.app/
+- Category: Other
+- Adult ads: disabled
+- Selected formats: Popunder, Smartlink, Native Banner, Social Bar, Banner
+- Selected sizes: 300x250 and 728x90 (green checkmarks)
+- Instructed to click ADD, then create specific ad units for the slots we have:
+  - Homepage
+  - Results Top
+  - Results In-Content (high value)
+  - Batteries page
+- Told to paste the generated Adsterra code blocks here so they can be wired into the existing AdsterraAd components (which use rawHtml prop for full scripts).
+- AdsterraAd.tsx already updated for dark theme compatibility (wrapper changed from bg-white to slate-800 with cyan borders).
+- ads.txt and component slots are in place in page.tsx, results/page.tsx, batteries/page.tsx.
+- README has the activation steps.
+
+Other notes:
+- The prod screenshot matches the pre-neon light theme exactly (old globals.css styling).
+- Once user redeploys on Vercel, the new dark neon UI + price ranges + price sort + higher battery count should appear.
+- User was in the middle of Adsterra setup when asking about the UI.
+
+Next expected:
+- User will redeploy on Vercel and confirm the new UI.
+- User will create ad units in Adsterra and paste code snippets for integration.
+- After Adsterra codes are in, push + redeploy for live ads.
+
+Log updated with latest chat events.

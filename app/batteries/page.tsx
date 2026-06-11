@@ -25,8 +25,20 @@ export default async function BatteriesPage() {
         </div>
       )}
 
-      {/* === ADSTERRA === */}
-      <AdsterraAd label="Adsterra — above or below battery catalogue" minHeight={90} />
+      {/* === ADSTERRA: 300x250 Banner === */}
+      <AdsterraAd
+        rawHtml={`<script>
+  atOptions = {
+    'key' : '1688aaeebc87656c6fe188ec7a03766e',
+    'format' : 'iframe',
+    'height' : 250,
+    'width' : 300,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/1688aaeebc87656c6fe188ec7a03766e/invoke.js"></script>`}
+        minHeight={260}
+      />
 
       {all.length === 0 ? (
         <div className="mt-8 card">

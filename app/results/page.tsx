@@ -68,8 +68,20 @@ export default async function ResultsPage({
             <VehicleCard vehicle={result.vehicle} live={result.liveVehicle} dataSource={result.dataSource} />
           </div>
 
-          {/* === ADSTERRA === */}
-          <AdsterraAd label="Adsterra — top / leaderboard (results page)" minHeight={90} />
+          {/* === ADSTERRA: 300x250 Banner (top) === */}
+          <AdsterraAd
+            rawHtml={`<script>
+  atOptions = {
+    'key' : '1688aaeebc87656c6fe188ec7a03766e',
+    'format' : 'iframe',
+    'height' : 250,
+    'width' : 300,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/1688aaeebc87656c6fe188ec7a03766e/invoke.js"></script>`}
+            minHeight={260}
+          />
 
           <div className="mt-6">
             <div className="flex items-baseline justify-between">
@@ -88,8 +100,12 @@ export default async function ResultsPage({
             This is a guide based on publicly available specifications and our seeded database. Always verify the battery’s dimensions, terminal layout, technology (AGM/EFB/standard), Ah and CCA against your vehicle’s requirements and the retailer’s fitment tool. We accept no liability for incorrect fitment.
           </div>
 
-          {/* === ADSTERRA === */}
-          <AdsterraAd label="Adsterra — in-content / sidebar (results)" minHeight={250} />
+          {/* === ADSTERRA: Native Banner (in-content) === */}
+          <AdsterraAd
+            rawHtml={`<script async="async" data-cfasync="false" src="https://pl29715842.effectivecpmnetwork.com/fb7153604fc4ceb08983cedba0df2ff8/invoke.js"></script>
+<div id="container-fb7153604fc4ceb08983cedba0df2ff8"></div>`}
+            minHeight={260}
+          />
         </>
       )}
 
