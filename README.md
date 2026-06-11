@@ -42,62 +42,99 @@ After changing schema you can also run `npm run db:push`.
 - `/batteries` — Full catalogue table
 - `/how-it-works` & `/disclaimer` — Important consumer information
 
-## Monetisation
+## Current status (June 2026)
 
-1. **Adsterra**: Replace the `<AdPlaceholder />` components (home, results, batteries pages) with your real ad units/scripts. See comments in `app/layout.tsx` for Next.js `<Script>` loading tips.
-2. **Affiliates**: Update `lib/affiliates.ts` — add your Awin / Amazon Associates / custom tracking parameters to the `baseSearch` URLs.
+**WIP / early beta.** Prominent banners are shown on the site. The core experience (enter reg → see vehicle + matching batteries with dimensions, Ah, CCA, stop/start tech, seller links) works great in demo mode and with a real Postgres.
 
-All retailer links open in new tabs with clear "you may earn commission" style notes. Place ads thoughtfully so the core battery finder experience stays excellent.
+**Goal**: Convenient "jump off" site for UK drivers looking for the right battery. Revenue primarily from **Adsterra advertising** (high-intent traffic on results page is valuable) + affiliate commissions on battery purchases.
 
-## Deploy to Vercel (from Git)
+A live reg lookup feature is included (more data = better battery recommendations).
 
-Your repo: https://github.com/MichBuch/carbat
+## Live registration lookup costs & limits (important)
 
-1. Push your latest code to the `main` branch on GitHub (you've already created the repo).
+Live lookup (real plates → rich make/model/variant + extras) is **optional and cached**.
 
-2. Go to [vercel.com/new](https://vercel.com/new) → Import Git Repository → select **MichBuch/carbat**.
+- **Apify** (the screenscraper actor we use by default): 
+  - **No hard daily cap**.
+  - Free plan: **$5 platform credits per month**.
+  - Each lookup is a lightweight run. Real-world cost is usually very low (fractions of a cent per successful reg check on the free tier).
+  - $5 often covers hundreds to low-thousands of unique lookups depending on the actor's exact pay-per-event pricing.
+  - After credits run out: live lookups gracefully fall back to demo/cached data (no breakage).
+  - Upgrade path: Starter plan ($29/mo) gives $29 credits + higher concurrent limits.
 
-3. **Important: Add these Environment Variables** (for Production + Preview):
-   - `DATABASE_URL` → the **Pooled** connection string from your Neon project (carbat / old-fire-49211263).  
-     Example: `postgresql://...@ep-...-pooler...neon.tech/neondb?sslmode=require`
-   - `NEXT_PUBLIC_SITE_URL` → your final URL, e.g. `https://carbat.vercel.app`
+- **UK Vehicle Data (recommended for better battery data)**: Free no-time-limit **sandbox/trial** (but restricted to test regs with 'A' and **cannot be used on a public production site**). Production is pure pay-per-lookup (typically a few pence per successful VRM; battery data is a separate cheap add-on). Volume discounts apply. No "included daily checks".
 
-4. Click Deploy.
+- **Caching saves money**: Once any plate is successfully looked up (or seeded), it is stored in your Postgres. Subsequent visitors get it for free instantly. Popular plates become almost zero-cost very quickly.
 
-The site will be live immediately because we built in a rich **demo data fallback**. Reg search, battery matching, filters, and price comparison links will all work with sample data even before the database is seeded.
+**Recommendation for an ad-revenue site**: Leave live lookup enabled (it improves the product) but don't worry about high costs at modest traffic. Monitor your Apify dashboard. You can set `VEHICLE_LOOKUP_PROVIDER=off` at any time to disable external calls completely.
 
-5. **Seed the real data** (do this once after the first successful deploy):
+## Monetisation (Adsterra focus)
 
-   **Easiest option (recommended):**
-   - Go to your Neon console → SQL Editor
-   - Paste the entire contents of `db/init.sql` and run it.
-   - Then paste the entire contents of `db/seed.sql` and run it.
+Primary revenue = **advertising** (Adsterra). Secondary = affiliate links on the battery cards.
 
-   **Alternative (local):**
-   - Make sure your local `.env.local` has the same `DATABASE_URL` as Vercel.
-   - Run:
-     ```bash
-     npm run db:setup
-     npm run db:seed
-     ```
+### Activating real Adsterra ads (step-by-step)
 
-6. (Optional but recommended) Add your Adsterra ad codes and update affiliate links in `lib/affiliates.ts`, then push a new commit to trigger a redeploy.
+1. Sign up / log in at https://adsterra.com/ and create ad zones for the placements we have:
+   - Homepage banner/native
+   - Results page top + in-content/sidebar (very high intent — users are actively choosing a battery)
+   - Batteries catalogue page
 
-You can also deploy from CLI later:
-```bash
-npx vercel
-npx vercel --prod
-```
+2. For each zone, Adsterra will give you a code snippet (usually an `atOptions` object + a `<script src="...invoke.js">` URL, or a full HTML block, or popunder/direct link code).
 
-## After Deploy
+3. **Easiest way right now**:
+   - Open the new `components/AdsterraAd.tsx`
+   - Look at the props: `zoneId`, `scriptSrc`, `atOptions`, or `rawHtml`.
+   - Either:
+     - Paste the **full raw HTML/script block** they gave you into the `rawHtml` prop on the pages, **or**
+     - Extract the parts and pass `atOptions` + `scriptSrc` + `zoneId`.
 
-- The site is resilient: if the database isn't ready yet it shows friendly messages and falls back to high-quality demo data.
-- All disclaimers about "guide only" and user responsibility are already prominent on the site.
-- Update `NEXT_PUBLIC_SITE_URL` in Vercel if you add a custom domain.
+4. The pages (`app/page.tsx`, `app/results/page.tsx`, `app/batteries/page.tsx`) already call `<AdsterraAd label="..." />` with good comments. Replace the calls with your real data.
+
+5. Add an `ads.txt` file (we already created `public/ads.txt` as a starter — replace the placeholder lines with the exact verification line Adsterra gives you).
+
+6. (Optional) Add popunder / social bar / direct link codes once in `app/layout.tsx` using `<Script strategy="afterInteractive" ... />`.
+
+7. Push a commit → Vercel redeploys.
+
+**Tips for revenue**:
+- Results page after a reg search is your highest-value inventory (user has clear intent).
+- Use responsive / native formats where possible.
+- Keep core UX clean — don't let ads push the battery list too far down.
+- We already have good disclosures in the footer + disclaimer page.
+
+Affiliate note: Update the URLs in `lib/affiliates.ts` with your real tracking/affiliate tags.
+
+## Deploy / update on Vercel (from Git)
+
+The code was just pushed to `main` (commit includes WIP banner, live lookup, Adsterra components, ads.txt, etc.).
+
+1. If not already connected: Go to https://vercel.com/new → Import **MichBuch/carbat**.
+
+2. **Required environment variables** (Production + Preview):
+   - `DATABASE_URL` (Neon pooled connection)
+   - `NEXT_PUBLIC_SITE_URL` (your final domain)
+   - For live reg lookup (optional): `VEHICLE_LOOKUP_PROVIDER=apify` + `APIFY_API_TOKEN=...`
+   - For Adsterra you can use `NEXT_PUBLIC_ADSTERRA_BANNER` etc. if you want to drive content from env, but the component approach above is more flexible.
+
+3. Deploy.
+
+4. After first deploy:
+   - Seed your DB (Neon SQL editor is easiest: paste `db/init.sql` then `db/seed.sql`).
+   - Add your real Adsterra codes + push one more commit (or use Vercel dashboard env + redeploy).
+
+You can also run `npx vercel --prod` from the folder once locally configured.
+
+## After changes
+
+- The site shows a clear **WIP beta banner** on the homepage and results.
+- All live lookup and ad work is behind clear labels so you can finish wiring your specific Adsterra zones quickly.
+- Demo mode (no DB) still gives a full working experience including the MT19XHU Renault Trafic example.
 
 ## Important disclaimers (built into the site)
 
 Users are responsible for verifying fitment. The site is a guide only. See `/disclaimer`.
+
+Live data and battery recommendations are best-effort. The prominent WIP banner + disclaimers make the "guide only" nature very clear to visitors (important for ad network compliance and user trust).
 
 ## Live registration (VRM) lookup — real reg numbers
 
