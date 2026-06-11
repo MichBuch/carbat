@@ -138,3 +138,51 @@ Current status:
 
 Ready to resume tomorrow. All recent work (UI overhaul, prices/sort, build fixes, Adsterra full integration) documented.
 
+
+=== Update - 11 June 2026 (Adsterra ad codes integrated + Safe testing + SEO / AI search strategy) ===
+
+User provided the full set of Adsterra ad unit codes:
+
+- 29615343 Native Banner (NativeBanner_1) - script + container div
+- 29615344 Banner 300x250 (300x250_1) - atOptions key 1688aaeebc87656c6fe188ec7a03766e
+- 29615345 Popunder (Popunder_1) - global script
+- 29615346 Social Bar (SocialBar_1) - global script
+- 29615347 Smartlink (Smartlink_1) - link with key=71a39c70e260b4a78cd99e29eae84f78
+- 29615348 Banner 728x90 (728x90_1) - atOptions key e0b160958619964e1c2785d924d48bd4
+
+Integration completed and pushed:
+- Homepage: 728x90 Banner
+- Results page Top: 300x250 Banner
+- Results page In-Content: Native Banner (with exact container)
+- Batteries page: 300x250 Banner
+- Layout.tsx: Popunder + Social Bar added as global scripts (lazyOnload)
+- Footer: Smartlink added as small "Sponsored: Check offers" text link
+
+All banners use the AdsterraAd component with rawHtml prop. The component wrapper was previously updated for the dark neon theme (slate-800 + cyan borders).
+
+User asked how to test the app/ads safely without Adsterra flagging clicks as fake:
+- Never click your own ads on the production domain.
+- Use Vercel Preview deployments (unique URLs from each push) for testing ad rendering.
+- Use browser DevTools to inspect containers, network requests (invoke.js), and page source.
+- Rely on Adsterra's own Preview/Test buttons in the dashboard.
+- Test the non-ad functionality (reg lookup, battery matching, prices, sorting, dark UI) freely on localhost or prod.
+- For any manual verification on live domain, use VPN/different device and do not click.
+- Monitor Adsterra dashboard for Impressions (safe) vs Clicks (risky if from you).
+
+User asked how to push the site up the Google / AI search stack:
+- Core advice: Traditional SEO fundamentals still matter in 2026 for both Google and AI features (AI Overviews, Perplexity, etc.).
+- Technical: Set up Google Search Console immediately, generate/submit sitemap (use Next.js app/sitemap.ts), robots.txt, verify ownership.
+- On-page: Optimize titles, meta descriptions, headings. Make the reg lookup results pages more SEO-friendly where possible.
+- Content strategy: Create evergreen guides (EFB vs AGM, start/stop explained, CCA/Ah guide, vehicle-specific fitment articles). Use tables heavily (already strong with specs + prices). Add FAQ sections with schema.
+- AI / Generative Engine Optimization (AEO/GEO): Use clear 40-60 word answer blocks at the top of sections, question-based H2s, structured data (FAQPage, HowTo, Vehicle, Product schema), concise direct answers, lists/tables/comparisons that AI can easily quote. Build topical authority around "car battery by registration UK".
+- Off-page: Share on UK car forums, Reddit (r/CarTalkUK etc.), Facebook groups. Aim for backlinks.
+- Leverage the unique reg-lookup feature for long-tail keywords like "battery for MT19XHU", "Renault Trafic battery", "start stop battery finder".
+- Measurement: Google Search Console for impressions/clicks/AI features + Google Analytics.
+
+Current status:
+- Neon dark sparky UI + prices + price sort + higher battery limits (48) + full Adsterra integration are in the repo and pushed.
+- User still needs to manually Redeploy on Vercel to see the new UI and live ads (last prod screenshot was still the old light theme).
+- Adsterra website is added; the provided units are now wired into the live slots.
+
+The local chat history (cbat-1106.txt) has been updated with this section so the user can pick up in the morning.
+
