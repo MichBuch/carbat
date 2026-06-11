@@ -123,12 +123,6 @@ export default function AdsterraAd({
     </div>
   );
 }
-```
 
-**Quick activation checklist (see README for full steps):**
-- Log into Adsterra → create zones for the placements below.
-- Copy the code they give you.
-- Either:
-  a) Paste the full script+HTML into `rawHtml` prop, or
-  b) Extract `atOptions` + the invoke `src` and pass them.
-- Replace the AdsterraAd calls (or keep using improved placeholders).
+// Quick activation: see the big "Activating real Adsterra ads" section in README.md.
+// Paste your zone codes into the AdsterraAd calls on the pages or use the rawHtml prop.
