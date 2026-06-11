@@ -1,8 +1,12 @@
-import { config } from "dotenv";
 import { z } from "zod";
 
-config({ path: ".env.local" });
-config();
+// IMPORTANT:
+// Next.js automatically loads .env.local / .env / .env.production etc. into process.env
+// BEFORE your app code runs (both locally with `next dev`/`next build` and on Vercel).
+// Do NOT call dotenv.config() here — it is unnecessary for the Next.js app bundle
+// and causes "Module not found: Can't resolve 'dotenv'" on clean Vercel builds.
+//
+// The db-*.mjs scripts import dotenv themselves when needed.
 
 const schema = z.object({
   DATABASE_URL: z.string().min(1).optional(),
