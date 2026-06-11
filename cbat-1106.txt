@@ -72,3 +72,69 @@ Next expected:
 - After Adsterra codes are in, push + redeploy for live ads.
 
 Log updated with latest chat events.
+
+=== Update - 11 June 2026 (Adsterra codes integrated) ===
+
+User provided the following Ad Unit codes from Adsterra:
+
+- Native Banner (container-fb7153604fc4ceb08983cedba0df2ff8)
+- Banner 300x250 (atOptions key 1688aaeebc87656c6fe188ec7a03766e)
+- Popunder (pl29715844...)
+- Social Bar (pl29715845...)
+- Smartlink (effectivecpmnetwork.com/rbtpfyvk0 key=71a39c70e260b4a78cd99e29eae84f78)
+- Banner 728x90 (atOptions key e0b160958619964e1c2785d924d48bd4)
+
+Integration completed and pushed (commit 8ac4243):
+
+- Homepage: 728x90 Banner via rawHtml in AdsterraAd
+- Results page Top: 300x250 Banner via rawHtml
+- Results page In-Content: Native Banner (with its container div) via rawHtml
+- Batteries page: 300x250 Banner via rawHtml (reusing the unit code for coverage)
+- Layout: Popunder and Social Bar added as global <Script strategy=\"lazyOnload\" /> 
+- Footer: Smartlink added as small \"Sponsored: Check offers\" text link
+
+AdsterraAd wrapper already dark-theme friendly (slate-800 + cyan borders).
+
+The codes are now live in the source. After Vercel redeploys (see previous instructions for manual redeploy if needed), the ads should appear.
+
+Note: Some banner units may be used across pages; the network will handle impressions. Popunder/Social Bar are site-wide.
+
+User should monitor Adsterra dashboard for impressions and revenue.
+
+Log updated.
+
+=== Update - 11 June 2026 (Adsterra ad units fully wired + final log) ===
+
+User provided exact Adsterra ad unit codes (with IDs):
+
+- 29615343 Native Banner (NativeBanner_1) - container + invoke script
+- 29615344 Banner 300x250 (300x250_1) - atOptions 1688aaeebc87656c6fe188ec7a03766e
+- 29615345 Popunder (Popunder_1) - global script
+- 29615346 Social Bar (SocialBar_1) - global script
+- 29615347 Smartlink (Smartlink_1) - https://www.effectivecpmnetwork.com/rbtpfyvk0?key=71a39c70e260b4a78cd99e29eae84f78
+- 29615348 Banner 728x90 (728x90_1) - atOptions e0b160958619964e1c2785d924d48bd4
+
+Code integration applied:
+
+- Homepage (app/page.tsx): 728x90 Banner using rawHtml
+- Results Top (app/results/page.tsx): 300x250 Banner using rawHtml
+- Results In-Content (app/results/page.tsx): Native Banner (with exact container div) using rawHtml
+- Batteries page (app/batteries/page.tsx): 300x250 Banner using rawHtml
+- Layout (app/layout.tsx): 
+  - Popunder global via next/script lazyOnload
+  - Social Bar global via next/script lazyOnload
+- Footer: Smartlink added as small "Sponsored: Check offers" text link
+
+All placements use the dark-neon compatible AdsterraAd wrapper (updated earlier for slate-800 + cyan borders to match the new theme).
+
+Git: Changes committed and pushed (commit 8ac4243 in previous step).
+
+Local doc: This section appended to cbat-1106.txt for tomorrow's reference.
+
+Current status:
+- Neon sparky dark UI + prices + more batteries + Adsterra ads are in the source and on GitHub.
+- User needs to trigger redeploy on Vercel to see the new UI and live ads (as prod was still on old light theme at last check).
+- Adsterra: Website added. These units are now wired. Monitor dashboard for impressions. User can create more zones or adjust placements later.
+
+Ready to resume tomorrow. All recent work (UI overhaul, prices/sort, build fixes, Adsterra full integration) documented.
+
