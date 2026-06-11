@@ -1,6 +1,7 @@
 import { listAllBatteries } from "@/lib/vehicle-lookup";
 import { getPriceComparisonLinks } from "@/lib/affiliates";
 import AdPlaceholder from "@/components/AdPlaceholder";
+import AdsterraAd from "@/components/AdsterraAd";
 import Link from "next/link";
 import type { Battery } from "@/lib/types";
 import { DATABASE_URL } from "@/lib/env";
@@ -24,7 +25,8 @@ export default async function BatteriesPage() {
         </div>
       )}
 
-      <AdPlaceholder label="Adsterra — above or below battery catalogue" />
+      {/* === ADSTERRA === */}
+      <AdsterraAd label="Adsterra — above or below battery catalogue" minHeight={90} />
 
       {all.length === 0 ? (
         <div className="mt-8 card">
@@ -47,7 +49,7 @@ export default async function BatteriesPage() {
             </thead>
             <tbody className="divide-y">
               {all.map((b) => {
-                const links = getPriceComparisonLinks(b.brand, b.model, b.ah).slice(0, 2);
+                const links = getPriceComparisonLinks(b.brand, b.model, b.ah, b.groupSize).slice(0, 2);
                 return (
                   <tr key={b.id} className="hover:bg-white/60">
                     <td className="py-2.5 pr-3 font-medium">{b.brand} {b.model}</td>

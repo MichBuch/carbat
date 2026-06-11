@@ -1,6 +1,8 @@
 import RegForm from "@/components/RegForm";
 import Link from "next/link";
 import AdPlaceholder from "@/components/AdPlaceholder";
+import AdsterraAd from "@/components/AdsterraAd";
+import WipBanner from "@/components/WipBanner";
 import { listPopularVehicles } from "@/lib/vehicle-lookup";
 import { DATABASE_URL } from "@/lib/env";
 
@@ -8,7 +10,7 @@ export default async function Home() {
   const popular = await listPopularVehicles(12);
   const usingDemo = !DATABASE_URL;
 
-  const demoRegs = ["AB12CDE", "BX15KLM", "DE68FNP", "GV17XYZ", "LC65MNO"];
+  const demoRegs = ["AB12CDE", "BX15KLM", "DE68FNP", "MT19XHU", "GV17XYZ", "LC65MNO"];
 
   return (
     <>
@@ -42,6 +44,8 @@ export default async function Home() {
             Set <code>DATABASE_URL</code> in <code>.env.local</code> + run <code>npm run db:setup && npm run db:seed</code> for your own data.
           </div>
         )}
+
+        <WipBanner className="mx-auto mt-6 max-w-3xl" />
       </section>
 
       {/* Trust / considerations */}
@@ -82,8 +86,11 @@ export default async function Home() {
         </section>
       )}
 
-      {/* Adsterra ad placement — replace <AdPlaceholder /> below with real ad code */}
-      <AdPlaceholder label="Adsterra — homepage banner or native placement" />
+      {/* === ADSTERRA: Replace with your real zone code === */}
+      <AdsterraAd
+        label="Adsterra — homepage banner / native (high value placement)"
+        minHeight={100}
+      />
 
       {/* Disclaimer teaser */}
       <div className="disclaimer mt-4">

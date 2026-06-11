@@ -21,6 +21,8 @@ export default function HowItWorks() {
       <h2>Data &amp; limitations</h2>
       <p>Our vehicle profiles and battery catalogue are based on common UK market data. Real cars can have different batteries depending on options (stop/start delete packs, cold climate packs, large audio, etc.).</p>
 
+      <p>When you enter a registration we first check our cache, then (if configured) use a low-cost live lookup provider (e.g. Apify screenscraper of the public DVLA service or licensed DVLA partners such as UK Vehicle Data). Battery tray dimensions, start/stop status and electrical minima are often derived via model heuristics because basic reg data does not include the exact battery specification. Providers that expose dedicated battery data (e.g. UKVD) will give even richer results.</p>
+
       <p>Always treat the output as a shortlist and verify on the retailer site + your vehicle handbook before buying.</p>
 
       <div className="disclaimer not-prose mt-8">

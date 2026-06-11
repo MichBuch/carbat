@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function BatteryCard({ battery, fit, explicit }: Props) {
-  const priceLinks = getPriceComparisonLinks(battery.brand, battery.model, battery.ah);
+  const priceLinks = getPriceComparisonLinks(battery.brand, battery.model, battery.ah, battery.groupSize);
 
   return (
     <div className="card group flex flex-col">

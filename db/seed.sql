@@ -26,7 +26,8 @@ VALUES
   ('volvo-xc60-2018-2023-d4', 'Volvo', 'XC60', 'D4 (SPA)', 2018, 2023, 1969, 'diesel', true, '0', 315, 175, 190, 80, 95, 850, 'agm', 'B13', 'SPA platform often AGM.'),
   ('tesla-model3-2019-2024', 'Tesla', 'Model 3', 'Standard Range', 2019, 2024, NULL, 'other', false, '0', 207, 175, 190, 40, 50, 400, 'standard', 'B0', '12V auxiliary battery only (Li main pack).'),
   ('ford-transit-custom-2018-2023-2.0', 'Ford', 'Transit Custom', '2.0 EcoBlue', 2018, 2023, 1996, 'diesel', false, '0', 353, 175, 190, 90, 105, 900, 'standard', 'B0', 'Van - larger case often 096/019.'),
-  ('vauxhall-vivaro-2019-2023-2.0', 'Vauxhall', 'Vivaro', '2.0 CDTi', 2019, 2023, 1996, 'diesel', false, '0', 353, 175, 190, 90, 100, 850, 'standard', 'B0', 'Common van size.')
+  ('vauxhall-vivaro-2019-2023-2.0', 'Vauxhall', 'Vivaro', '2.0 CDTi', 2019, 2023, 1996, 'diesel', false, '0', 353, 175, 190, 90, 100, 850, 'standard', 'B0', 'Common van size.'),
+  ('renault-trafic-2014-2022-1.6-dci', 'Renault', 'Trafic', '1.6 dCi 120 Panel Van', 2014, 2022, 1598, 'diesel', false, '0', 278, 175, 190, 70, 80, 640, 'standard', 'B13', 'Common LCV. Add EFB if your van has start/stop option.')
 ON CONFLICT (slug) DO NOTHING;
 
 -- ========== REG LOOKUPS (demo popular UK style regs - normalize to UPPER no spaces) ==========
@@ -77,6 +78,10 @@ ON CONFLICT (reg) DO NOTHING;
 
 INSERT INTO reg_lookups (reg, vehicle_id)
 SELECT 'BD15HIJ', v.id FROM vehicles v WHERE v.slug = 'ford-transit-custom-2018-2023-2.0'
+ON CONFLICT (reg) DO NOTHING;
+
+INSERT INTO reg_lookups (reg, vehicle_id)
+SELECT 'MT19XHU', v.id FROM vehicles v WHERE v.slug = 'renault-trafic-2014-2022-1.6-dci'
 ON CONFLICT (reg) DO NOTHING;
 
 -- ========== BATTERIES (realistic popular UK range) ==========

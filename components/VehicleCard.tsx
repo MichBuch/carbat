@@ -1,18 +1,31 @@
 import type { Vehicle } from "@/lib/types";
 import type { DemoVehicle } from "@/data/demo-data";
+import type { LiveVehicle } from "@/lib/live-lookup";
 
 type VehicleLike = Vehicle | DemoVehicle;
 
-export default function VehicleCard({ vehicle }: { vehicle: VehicleLike }) {
+export default function VehicleCard({
+  vehicle,
+  live,
+  dataSource,
+}: {
+  vehicle: VehicleLike;
+  live?: LiveVehicle | null;
+  dataSource?: string;
+}) {
   const years = vehicle.yearFrom === vehicle.yearTo
     ? vehicle.yearFrom
     : `${vehicle.yearFrom}–${vehicle.yearTo}`;
+
+  const extra = live || (vehicle as any)._live;
 
   return (
     <div className="card border-emerald-600/20 bg-emerald-50/40">
       <div className="flex flex-wrap items-start gap-x-8 gap-y-1">
         <div>
-          <div className="text-xs uppercase tracking-[2px] text-emerald-700 font-semibold">Vehicle identified</div>
+          <div className="text-xs uppercase tracking-[2px] text-emerald-700 font-semibold">
+            Vehicle identified {dataSource === "live" ? "• live lookup" : dataSource === "db" ? "• from catalogue" : ""}
+          </div>
           <div className="text-2xl font-black tracking-tight">
             {vehicle.make} {vehicle.model}
           </div>
@@ -41,6 +54,24 @@ export default function VehicleCard({ vehicle }: { vehicle: VehicleLike }) {
         <div className="mt-3 border-t border-emerald-900/10 pt-3 text-sm text-ink/70">
           Minimum requirements: {vehicle.minAh ? `${vehicle.minAh}Ah` : "—"} {vehicle.minCca ? `• ${vehicle.minCca}CCA` : ""}
           {vehicle.batteryLengthMaxMm && ` • max ${vehicle.batteryLengthMaxMm}×${vehicle.batteryWidthMaxMm}×${vehicle.batteryHeightMaxMm}mm`}
+        </div>
+      )}
+
+      {/* Rich extra details from live reg lookup (make the "more data the better" visible) */}
+      {extra && (
+        <div className="mt-3 border-t border-emerald-900/10 pt-3 text-xs text-ink/60 grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-1">
+          {extra.bodyType && <div>Body: {extra.bodyType}</div>}
+          {extra.colour && <div>Colour: {extra.colour}</div>}
+          {extra.co2Emissions != null && <div>CO₂: {extra.co2Emissions} g/km</div>}
+          {extra.motStatus && <div>MOT: {extra.motStatus}</div>}
+          {extra.taxStatus && <div>Tax: {extra.taxStatus}</div>}
+          {extra.registration && <div>Reg: {extra.registration}</div>}
+        </div>
+      )}
+
+      {dataSource === "live" && (
+        <div className="mt-2 text-[10px] text-emerald-700/80">
+          Live data via external lookup. Battery tray specs are best-effort — always verify in your handbook or with a retailer fitment tool.
         </div>
       )}
     </div>

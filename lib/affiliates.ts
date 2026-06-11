@@ -51,8 +51,8 @@ export function buildRetailerLink(retailer: Retailer, batteryName: string, brand
 }
 
 // Helper to produce a small set of comparison links for a battery
-export function getPriceComparisonLinks(brand: string, model: string, ah: number) {
-  const nameForSearch = `${model} ${ah}Ah`;
+export function getPriceComparisonLinks(brand: string, model: string, ah: number, groupSize?: string | null) {
+  const nameForSearch = groupSize ? `${model} ${ah}Ah ${groupSize}` : `${model} ${ah}Ah`;
   return retailers.map((r) => ({
     retailer: r.name,
     url: buildRetailerLink(r, nameForSearch, brand),

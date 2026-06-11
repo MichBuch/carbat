@@ -1,0 +1,6 @@
+# Add your Adsterra publisher ID / verification lines here when provided by Adsterra
+# Example (replace with the real line from your Adsterra account):
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+
+# You can also list other demand partners here.
+# See https://adsterra.com/ for their current ads.txt requirements.

@@ -66,6 +66,8 @@ export const demoVehicles: DemoVehicle[] = [
   { id: "v10", slug: "toyota-yaris-2014-2020-1.33", make: "Toyota", model: "Yaris", variant: "1.33 VVT-i", yearFrom: 2014, yearTo: 2020, engineCc: 1329, fuel: "petrol", startStop: false, batteryPolarity: "0", batteryLengthMaxMm: 207, batteryWidthMaxMm: 175, batteryHeightMaxMm: 190, minAh: 40, recommendedAh: 45, minCca: 400, recommendedType: "standard", holdDown: "B0", notes: "Reliable non start/stop.", active: true },
   { id: "v11", slug: "audi-a3-2013-2020-2.0-tdi", make: "Audi", model: "A3", variant: "2.0 TDI", yearFrom: 2013, yearTo: 2020, engineCc: 1968, fuel: "diesel", startStop: true, batteryPolarity: "0", batteryLengthMaxMm: 278, batteryWidthMaxMm: 175, batteryHeightMaxMm: 190, minAh: 68, recommendedAh: 72, minCca: 680, recommendedType: "agm", holdDown: "B13", notes: "8V A3 often AGM.", active: true },
   { id: "v12", slug: "mercedes-c220-2015-2021-w205", make: "Mercedes-Benz", model: "C-Class", variant: "C220d (W205)", yearFrom: 2015, yearTo: 2021, engineCc: 2143, fuel: "diesel", startStop: true, batteryPolarity: "0", batteryLengthMaxMm: 315, batteryWidthMaxMm: 175, batteryHeightMaxMm: 190, minAh: 80, recommendedAh: 95, minCca: 850, recommendedType: "agm", holdDown: "B13", notes: "Premium AGM.", active: true },
+  // Renault Trafic van example (user example MT19 XHU)
+  { id: "v13", slug: "renault-trafic-2014-2022-1.6-dci", make: "Renault", model: "Trafic", variant: "1.6 dCi 120 Panel Van", yearFrom: 2014, yearTo: 2022, engineCc: 1598, fuel: "diesel", startStop: false, batteryPolarity: "0", batteryLengthMaxMm: 278, batteryWidthMaxMm: 175, batteryHeightMaxMm: 190, minAh: 70, recommendedAh: 80, minCca: 640, recommendedType: "standard", holdDown: "B13", notes: "Common LCV. Later models or options may have start/stop requiring EFB.", active: true },
 ];
 
 // Demo reg → vehicle id (or slug)
@@ -82,6 +84,8 @@ export const demoRegToVehicleId: Record<string, string> = {
   AF21BCD: "v2",   // Fiesta s/s (example)
   MX18EFG: "v3",   // Skoda approx to Golf
   BD15HIJ: "v3",   // Transit example -> use Golf for demo (or could add)
+  MT19XHU: "v13",  // Renault Trafic (user example)
+  MT19XHV: "v13",  // sibling reg example
 };
 
 // Demo batteries
@@ -108,6 +112,7 @@ export const demoBestMatches: Record<string, string[]> = {
   "v9": ["b4"], // Qashqai -> EFB 70
   "v11": ["b8"], // Audi -> Yuasa AGM
   "v12": ["b6"], // Mercedes -> AGM 80
+  "v13": ["b4"], // Trafic -> EFB 70 (good upgrade even if non s/s)
 };
 
 export function getDemoVehicleByReg(reg: string): DemoVehicle | null {

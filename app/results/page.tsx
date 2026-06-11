@@ -2,6 +2,8 @@ import { lookupVehicleByReg } from "@/lib/vehicle-lookup";
 import VehicleCard from "@/components/VehicleCard";
 import RegForm from "@/components/RegForm";
 import AdPlaceholder from "@/components/AdPlaceholder";
+import AdsterraAd from "@/components/AdsterraAd";
+import WipBanner from "@/components/WipBanner";
 import ResultsFilters from "@/components/ResultsFilters";
 import Link from "next/link";
 
@@ -35,16 +37,24 @@ export default async function ResultsPage({
         </div>
       )}
 
+      {result?.dataSource === "live" && (
+        <div className="mt-3 max-w-2xl rounded-xl border border-emerald-400/40 bg-emerald-50 px-4 py-2 text-xs text-emerald-800">
+          Vehicle details pulled via <strong>live registration lookup</strong>. Battery recommendations use our fitment rules + catalogue (tray dimensions and electrical requirements are derived from the reg data + model heuristics).
+        </div>
+      )}
+
       <div className="mt-4 max-w-md">
         <RegForm initialReg={reg} />
       </div>
+
+      <WipBanner variant="compact" className="mt-3 max-w-2xl" />
 
       {!result || result.error || !result.vehicle ? (
         <div className="mt-8 card max-w-2xl border-amber-400/40 bg-amber-50">
           <p className="font-semibold">No exact match found for this registration.</p>
           {result?.error && <p className="mt-1 text-sm text-ink/80">{result.error}</p>}
           <p className="mt-3 text-sm">
-            Demo registrations that work right now: <strong>AB12CDE</strong>, <strong>BX15KLM</strong>, <strong>DE68FNP</strong>, <strong>GV17XYZ</strong>, <strong>LC65MNO</strong>.
+            Demo registrations that work right now: <strong>AB12CDE</strong>, <strong>BX15KLM</strong>, <strong>DE68FNP</strong>, <strong>MT19XHU</strong> (Renault Trafic), <strong>GV17XYZ</strong>, <strong>LC65MNO</strong>.
             <br />You can also browse the full catalogue or go back and try another plate.
           </p>
           <div className="mt-4 flex gap-3">
@@ -55,10 +65,11 @@ export default async function ResultsPage({
       ) : (
         <>
           <div className="mt-6">
-            <VehicleCard vehicle={result.vehicle} />
+            <VehicleCard vehicle={result.vehicle} live={result.liveVehicle} dataSource={result.dataSource} />
           </div>
 
-          <AdPlaceholder label="Adsterra — top / leaderboard placement" />
+          {/* === ADSTERRA === */}
+          <AdsterraAd label="Adsterra — top / leaderboard (results page)" minHeight={90} />
 
           <div className="mt-6">
             <div className="flex items-baseline justify-between">
@@ -77,7 +88,8 @@ export default async function ResultsPage({
             This is a guide based on publicly available specifications and our seeded database. Always verify the battery’s dimensions, terminal layout, technology (AGM/EFB/standard), Ah and CCA against your vehicle’s requirements and the retailer’s fitment tool. We accept no liability for incorrect fitment.
           </div>
 
-          <AdPlaceholder label="Adsterra — in-content or results sidebar" />
+          {/* === ADSTERRA === */}
+          <AdsterraAd label="Adsterra — in-content / sidebar (results)" minHeight={250} />
         </>
       )}
 
