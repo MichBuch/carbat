@@ -43,7 +43,7 @@ export default function AdsterraAd({
   if (rawHtml) {
     return (
       <div
-        className={`my-4 rounded-xl border border-ink/10 bg-white p-1 ${className}`}
+        className={`my-4 rounded-xl border border-cyan-700/30 bg-slate-800/80 p-1 ${className}`}
         style={{ minHeight }}
         dangerouslySetInnerHTML={{ __html: rawHtml }}
       />
@@ -62,7 +62,7 @@ export default function AdsterraAd({
     // Dev / placeholder mode
     return (
       <div
-        className={`my-4 flex min-h-[${minHeight}px] items-center justify-center rounded-xl border border-dashed border-ink/20 bg-white/60 p-4 text-center text-xs text-ink/50 ${className}`}
+        className={`my-4 flex min-h-[${minHeight}px] items-center justify-center rounded-xl border border-dashed border-cyan-700/40 bg-slate-800/60 p-4 text-center text-xs text-cyan-300/60 ${className}`}
       >
         <div>
           <div className="font-medium">{label}</div>
