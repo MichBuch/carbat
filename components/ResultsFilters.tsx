@@ -15,7 +15,7 @@ interface Item {
 export default function ResultsFilters({ items }: { items: Item[] }) {
   const [type, setType] = useState<"all" | "standard" | "efb" | "agm">("all");
   const [minAh, setMinAh] = useState(0);
-  const [sort, setSort] = useState<"best" | "ah" | "cca">("best");
+  const [sort, setSort] = useState<"best" | "ah" | "cca" | "price">("best");
 
   const filtered = useMemo(() => {
     let res = items.filter((i) => {
@@ -28,8 +28,11 @@ export default function ResultsFilters({ items }: { items: Item[] }) {
       res = [...res].sort((a, b) => b.fit.score - a.fit.score || a.battery.ah - b.battery.ah);
     } else if (sort === "ah") {
       res = [...res].sort((a, b) => a.battery.ah - b.battery.ah);
-    } else {
+    } else if (sort === "cca") {
       res = [...res].sort((a, b) => b.battery.cca - a.battery.cca);
+    } else if (sort === "price") {
+      const getPrice = (b: any) => (b.priceMin ?? b.priceMax ?? 9999);
+      res = [...res].sort((a, b) => getPrice(a.battery) - getPrice(b.battery));
     }
     return res;
   }, [items, type, minAh, sort]);
@@ -58,6 +61,7 @@ export default function ResultsFilters({ items }: { items: Item[] }) {
             <option value="best">Best fit first</option>
             <option value="ah">Lowest capacity first</option>
             <option value="cca">Highest CCA first</option>
+            <option value="price">Lowest price first</option>
           </select>
         </label>
 

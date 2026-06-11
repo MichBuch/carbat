@@ -1,0 +1,30 @@
+=== Update - 11 June 2026 (More batteries, prices, sort, neon UI) ===
+
+User feedback after successful deploy:
+- UI pretty good
+- Own car finds model but only 8 batteries shown (wants more)
+- Want price or price range shown
+- Allow sorting by price
+- Prefer the dark neon "sparky" cyan look/feel from C:\lib\dev\holdingco (see its globals.css, tailwind, components for cyan glows, slate-900, neon-card etc)
+
+Changes made:
+- Increased results limit in lookup paths and demo from 24/20 to 48 (show way more fitting batteries)
+- Added priceMin / priceMax to Battery schema, DemoBattery, all demo data samples, and full seed.sql INSERT (realistic UK guide prices e.g. standard £38-£74, EFB £60-£88, AGM £75-£130, vans higher)
+- BatteryCard now shows "£xx–£yy (guide)" in cyan when available
+- ResultsFilters: added "Lowest price first" sort option; implemented price sort using min price
+- Major UI restyle to neon dark sparky theme:
+  - globals.css: dark #0f172a bg + subtle cyan radial glows, cyan-400/500 accents replacing emerald, .card with neon glow shadows + hover intensify, .input/.btn with neon inset/shadow, updated pills/badges to cyan on dark, new .neon-* utilities
+  - layout: added dark class
+  - Updated key components (VehicleCard, page links, results) to cyan/neon classes, dark card variants
+  - Kept useful utility classes but infused holdingco neon cyan feel (cyan glows, slate-800 cards, cyan text accents)
+- Note for DB: prices require schema update. Since you have live DB, either:
+  - Reseed (recommended for clean): run init+seed again in Neon SQL editor
+  - Or ALTER: ALTER TABLE batteries ADD COLUMN price_min integer, ADD COLUMN price_max integer;
+
+Your own car now should surface more options (up to ~48 that fit criteria). Prices + price sort live.
+
+Theme now matches your preferred holdingco neon sparky cyan dark aesthetic while keeping carbat functionality.
+
+Next: if you share your specific reg or want even more batteries added to catalogue, or Adsterra wiring for revenue, say the word.
+
+Log updated.

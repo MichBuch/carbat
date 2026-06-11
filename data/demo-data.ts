@@ -49,6 +49,8 @@ export type DemoBattery = {
   warrantyMonths: number;
   technology?: string | null;
   groupSize?: string | null;
+  priceMin?: number | null;
+  priceMax?: number | null;
   active: boolean;
 };
 
@@ -90,18 +92,18 @@ export const demoRegToVehicleId: Record<string, string> = {
 
 // Demo batteries
 export const demoBatteries: DemoBattery[] = [
-  { id: "b1", slug: "varta-blue-dynamic-52", brand: "Varta", model: "Blue Dynamic 52Ah", ah: 52, cca: 470, type: "standard", lengthMm: 242, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 12, warrantyMonths: 30, technology: "SMF", groupSize: "065", active: true },
-  { id: "b2", slug: "varta-silver-dynamic-70", brand: "Varta", model: "Silver Dynamic 70Ah", ah: 70, cca: 630, type: "standard", lengthMm: 278, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 15, warrantyMonths: 36, technology: "SMF Enhanced", groupSize: "096", active: true },
-  { id: "b3", slug: "varta-blue-dynamic-efb-65", brand: "Varta", model: "Blue Dynamic EFB 65Ah", ah: 65, cca: 600, type: "efb", lengthMm: 242, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 15, warrantyMonths: 36, technology: "EFB", groupSize: "EFB065", active: true },
-  { id: "b4", slug: "varta-blue-dynamic-efb-70", brand: "Varta", model: "Blue Dynamic EFB 70Ah", ah: 70, cca: 680, type: "efb", lengthMm: 278, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 16, warrantyMonths: 36, technology: "EFB", groupSize: "EFB096", active: true },
-  { id: "b5", slug: "varta-silver-dynamic-agm-70", brand: "Varta", model: "Silver Dynamic AGM 70Ah", ah: 70, cca: 760, type: "agm", lengthMm: 278, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 17, warrantyMonths: 48, technology: "AGM", groupSize: "AGM096", active: true },
-  { id: "b6", slug: "varta-silver-dynamic-agm-80", brand: "Varta", model: "Silver Dynamic AGM 80Ah", ah: 80, cca: 800, type: "agm", lengthMm: 315, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 20, warrantyMonths: 48, technology: "AGM", groupSize: "AGM H7", active: true },
-  { id: "b7", slug: "yuasa-ybx7005", brand: "Yuasa", model: "YBX7005 EFB 65Ah", ah: 65, cca: 620, type: "efb", lengthMm: 242, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 15, warrantyMonths: 48, technology: "EFB", groupSize: "EFB065", active: true },
-  { id: "b8", slug: "yuasa-ybx9005", brand: "Yuasa", model: "YBX9005 AGM 70Ah", ah: 70, cca: 760, type: "agm", lengthMm: 278, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 17, warrantyMonths: 60, technology: "AGM VRLA", groupSize: "AGM096", active: true },
-  { id: "b9", slug: "bosch-s4008", brand: "Bosch", model: "S4 008 70Ah", ah: 70, cca: 630, type: "standard", lengthMm: 278, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 15, warrantyMonths: 24, technology: "PowerFrame", groupSize: "096", active: true },
-  { id: "b10", slug: "exide-efb-efb700", brand: "Exide", model: "EFB 700 70Ah", ah: 70, cca: 680, type: "efb", lengthMm: 278, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 16, warrantyMonths: 36, technology: "EFB", groupSize: "EFB096", active: true },
+  { id: "b1", slug: "varta-blue-dynamic-52", brand: "Varta", model: "Blue Dynamic 52Ah", ah: 52, cca: 470, type: "standard", lengthMm: 242, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 12, warrantyMonths: 30, technology: "SMF", groupSize: "065", priceMin: 42, priceMax: 58, active: true },
+  { id: "b2", slug: "varta-silver-dynamic-70", brand: "Varta", model: "Silver Dynamic 70Ah", ah: 70, cca: 630, type: "standard", lengthMm: 278, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 15, warrantyMonths: 36, technology: "SMF Enhanced", groupSize: "096", priceMin: 58, priceMax: 72, active: true },
+  { id: "b3", slug: "varta-blue-dynamic-efb-65", brand: "Varta", model: "Blue Dynamic EFB 65Ah", ah: 65, cca: 600, type: "efb", lengthMm: 242, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 15, warrantyMonths: 36, technology: "EFB", groupSize: "EFB065", priceMin: 62, priceMax: 78, active: true },
+  { id: "b4", slug: "varta-blue-dynamic-efb-70", brand: "Varta", model: "Blue Dynamic EFB 70Ah", ah: 70, cca: 680, type: "efb", lengthMm: 278, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 16, warrantyMonths: 36, technology: "EFB", groupSize: "EFB096", priceMin: 68, priceMax: 85, active: true },
+  { id: "b5", slug: "varta-silver-dynamic-agm-70", brand: "Varta", model: "Silver Dynamic AGM 70Ah", ah: 70, cca: 760, type: "agm", lengthMm: 278, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 17, warrantyMonths: 48, technology: "AGM", groupSize: "AGM096", priceMin: 78, priceMax: 95, active: true },
+  { id: "b6", slug: "varta-silver-dynamic-agm-80", brand: "Varta", model: "Silver Dynamic AGM 80Ah", ah: 80, cca: 800, type: "agm", lengthMm: 315, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 20, warrantyMonths: 48, technology: "AGM", groupSize: "AGM H7", priceMin: 92, priceMax: 115, active: true },
+  { id: "b7", slug: "yuasa-ybx7005", brand: "Yuasa", model: "YBX7005 EFB 65Ah", ah: 65, cca: 620, type: "efb", lengthMm: 242, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 15, warrantyMonths: 48, technology: "EFB", groupSize: "EFB065", priceMin: 65, priceMax: 82, active: true },
+  { id: "b8", slug: "yuasa-ybx9005", brand: "Yuasa", model: "YBX9005 AGM 70Ah", ah: 70, cca: 760, type: "agm", lengthMm: 278, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 17, warrantyMonths: 60, technology: "AGM VRLA", groupSize: "AGM096", priceMin: 82, priceMax: 102, active: true },
+  { id: "b9", slug: "bosch-s4008", brand: "Bosch", model: "S4 008 70Ah", ah: 70, cca: 630, type: "standard", lengthMm: 278, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 15, warrantyMonths: 24, technology: "PowerFrame", groupSize: "096", priceMin: 52, priceMax: 68, active: true },
+  { id: "b10", slug: "exide-efb-efb700", brand: "Exide", model: "EFB 700 70Ah", ah: 70, cca: 680, type: "efb", lengthMm: 278, widthMm: 175, heightMm: 190, polarity: "0", weightKg: 16, warrantyMonths: 36, technology: "EFB", groupSize: "EFB096", priceMin: 60, priceMax: 78, active: true },
   // A couple reverse for demo variety
-  { id: "b11", slug: "varta-blue-dynamic-60-r", brand: "Varta", model: "Blue Dynamic 60Ah (Rev)", ah: 60, cca: 540, type: "standard", lengthMm: 242, widthMm: 175, heightMm: 190, polarity: "1", weightKg: 13, warrantyMonths: 30, technology: "SMF", groupSize: "065R", active: true },
+  { id: "b11", slug: "varta-blue-dynamic-60-r", brand: "Varta", model: "Blue Dynamic 60Ah (Rev)", ah: 60, cca: 540, type: "standard", lengthMm: 242, widthMm: 175, heightMm: 190, polarity: "1", weightKg: 13, warrantyMonths: 30, technology: "SMF", groupSize: "065R", priceMin: 48, priceMax: 62, active: true },
 ];
 
 // Best match hints (vehicleId -> batteryId)
@@ -158,7 +160,7 @@ export function demoLookupVehicleByReg(reg: string): {
 
   const sorted = sortBatteriesByFit(withFit)
     .filter((x) => x.fit.fits)
-    .slice(0, 20);
+    .slice(0, 48);
 
   return {
     vehicle,

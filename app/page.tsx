@@ -21,7 +21,7 @@ export default async function Home() {
             UK CAR BATTERY FINDER
           </div>
           <h1 className="mt-4 text-5xl font-black tracking-tighter sm:text-6xl">
-            Find the <span className="text-emerald-600">right battery</span><br />for your car.
+            Find the <span className="text-cyan-400">right battery</span><br />for your car.
           </h1>
           <p className="mx-auto mt-4 max-w-md text-xl text-ink/70">
             Enter your registration. We check start/stop, engine, polarity, dimensions, Ah and CCA.
@@ -67,7 +67,7 @@ export default async function Home() {
         <section className="pb-10">
           <div className="mb-3 flex items-baseline justify-between">
             <h2 className="font-semibold tracking-tight">Popular vehicles {usingDemo ? "(demo data)" : ""}</h2>
-            <Link href="/batteries" className="text-sm text-emerald-600 hover:underline">Browse all batteries →</Link>
+            <Link href="/batteries" className="text-sm text-cyan-400 hover:underline">Browse all batteries →</Link>
           </div>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
             {popular.slice(0, 8).map((v: any) => (

@@ -23,7 +23,7 @@ export default async function ResultsPage({
   return (
     <div className="py-8">
       <div className="mb-6">
-        <Link href="/" className="text-sm text-emerald-600 hover:underline">← New search</Link>
+        <Link href="/" className="text-sm text-cyan-400 hover:underline">← New search</Link>
       </div>
 
       <h1 className="text-3xl font-black tracking-tight">Battery matches</h1>
@@ -73,7 +73,7 @@ export default async function ResultsPage({
 
           <div className="mt-6">
             <div className="flex items-baseline justify-between">
-              <h2 className="text-xl font-semibold">Recommended batteries that fit</h2>
+              <h2 className="text-xl font-semibold text-cyan-100">Recommended batteries that fit</h2>
               <span className="text-sm text-ink/50">{result.batteries.length} matching options</span>
             </div>
 

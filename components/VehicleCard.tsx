@@ -20,10 +20,10 @@ export default function VehicleCard({
   const extra = live || (vehicle as any)._live;
 
   return (
-    <div className="card border-emerald-600/20 bg-emerald-50/40">
+    <div className="card border-cyan-500/30 bg-slate-800/60">
       <div className="flex flex-wrap items-start gap-x-8 gap-y-1">
         <div>
-          <div className="text-xs uppercase tracking-[2px] text-emerald-700 font-semibold">
+          <div className="text-xs uppercase tracking-[2px] text-cyan-400 font-semibold">
             Vehicle identified {dataSource === "live" ? "• live lookup" : dataSource === "db" ? "• from catalogue" : ""}
           </div>
           <div className="text-2xl font-black tracking-tight">
@@ -45,13 +45,13 @@ export default function VehicleCard({
             <span className="pill bg-sky-600 text-white">{vehicle.recommendedType.toUpperCase()}</span>
           )}
           {vehicle.recommendedAh && (
-            <span className="pill bg-white text-ink border border-ink/20">{vehicle.recommendedAh}Ah rec.</span>
+            <span className="pill bg-slate-700 text-cyan-200 border border-cyan-700/40">{vehicle.recommendedAh}Ah rec.</span>
           )}
         </div>
       </div>
 
       {(vehicle.minAh || vehicle.minCca || vehicle.batteryLengthMaxMm) && (
-        <div className="mt-3 border-t border-emerald-900/10 pt-3 text-sm text-ink/70">
+        <div className="mt-3 border-t border-cyan-700/30 pt-3 text-sm text-cyan-200/70">
           Minimum requirements: {vehicle.minAh ? `${vehicle.minAh}Ah` : "—"} {vehicle.minCca ? `• ${vehicle.minCca}CCA` : ""}
           {vehicle.batteryLengthMaxMm && ` • max ${vehicle.batteryLengthMaxMm}×${vehicle.batteryWidthMaxMm}×${vehicle.batteryHeightMaxMm}mm`}
         </div>
@@ -59,7 +59,7 @@ export default function VehicleCard({
 
       {/* Rich extra details from live reg lookup (make the "more data the better" visible) */}
       {extra && (
-        <div className="mt-3 border-t border-emerald-900/10 pt-3 text-xs text-ink/60 grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-1">
+        <div className="mt-3 border-t border-cyan-700/30 pt-3 text-xs text-cyan-200/60 grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-1">
           {extra.bodyType && <div>Body: {extra.bodyType}</div>}
           {extra.colour && <div>Colour: {extra.colour}</div>}
           {extra.co2Emissions != null && <div>CO₂: {extra.co2Emissions} g/km</div>}
@@ -70,7 +70,7 @@ export default function VehicleCard({
       )}
 
       {dataSource === "live" && (
-        <div className="mt-2 text-[10px] text-emerald-700/80">
+        <div className="mt-2 text-[10px] text-cyan-400/80">
           Live data via external lookup. Battery tray specs are best-effort — always verify in your handbook or with a retailer fitment tool.
         </div>
       )}

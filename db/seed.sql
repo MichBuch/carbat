@@ -85,51 +85,51 @@ SELECT 'MT19XHU', v.id FROM vehicles v WHERE v.slug = 'renault-trafic-2014-2022-
 ON CONFLICT (reg) DO NOTHING;
 
 -- ========== BATTERIES (realistic popular UK range) ==========
-INSERT INTO batteries (slug, brand, model, ah, cca, type, length_mm, width_mm, height_mm, polarity, weight_kg, warranty_months, technology, group_size)
+INSERT INTO batteries (slug, brand, model, ah, cca, type, length_mm, width_mm, height_mm, polarity, weight_kg, warranty_months, technology, group_size, price_min, price_max)
 VALUES
   -- Budget / standard
-  ('banner-running-bull-44', 'Banner', 'Running Bull 44Ah', 44, 400, 'standard', 207, 175, 190, '0', 10, 24, 'Calcium', '063'),
-  ('exide-eb440', 'Exide', 'EB440', 44, 420, 'standard', 207, 175, 190, '0', 10, 24, 'Calcium', '063'),
-  ('yuasa-ybx1005', 'Yuasa', 'YBX1005 45Ah', 45, 400, 'standard', 207, 175, 190, '0', 10, 36, 'SMF Calcium', '063'),
-  ('varta-blue-dynamic-52', 'Varta', 'Blue Dynamic 52Ah', 52, 470, 'standard', 242, 175, 190, '0', 12, 30, 'SMF', '065'),
-  ('bosch-s4005', 'Bosch', 'S4 005 52Ah', 52, 470, 'standard', 242, 175, 190, '0', 12, 24, 'PowerFrame', '065'),
+  ('banner-running-bull-44', 'Banner', 'Running Bull 44Ah', 44, 400, 'standard', 207, 175, 190, '0', 10, 24, 'Calcium', '063', 38, 52),
+  ('exide-eb440', 'Exide', 'EB440', 44, 420, 'standard', 207, 175, 190, '0', 10, 24, 'Calcium', '063', 36, 50),
+  ('yuasa-ybx1005', 'Yuasa', 'YBX1005 45Ah', 45, 400, 'standard', 207, 175, 190, '0', 10, 36, 'SMF Calcium', '063', 40, 55),
+  ('varta-blue-dynamic-52', 'Varta', 'Blue Dynamic 52Ah', 52, 470, 'standard', 242, 175, 190, '0', 12, 30, 'SMF', '065', 45, 60),
+  ('bosch-s4005', 'Bosch', 'S4 005 52Ah', 52, 470, 'standard', 242, 175, 190, '0', 12, 24, 'PowerFrame', '065', 42, 57),
 
   -- Popular mid 60-70Ah
-  ('varta-blue-dynamic-60', 'Varta', 'Blue Dynamic 60Ah', 60, 540, 'standard', 242, 175, 190, '0', 13, 30, 'SMF', '065'),
-  ('yuasa-ybx1013', 'Yuasa', 'YBX1013 60Ah', 60, 550, 'standard', 242, 175, 190, '0', 13, 36, 'SMF', '065'),
-  ('exide-eb620', 'Exide', 'EB620 62Ah', 62, 540, 'standard', 242, 175, 190, '0', 13, 24, 'SMF', '065'),
-  ('varta-silver-dynamic-70', 'Varta', 'Silver Dynamic 70Ah', 70, 630, 'standard', 278, 175, 190, '0', 15, 36, 'SMF Enhanced', '096'),
-  ('bosch-s4008', 'Bosch', 'S4 008 70Ah', 70, 630, 'standard', 278, 175, 190, '0', 15, 24, 'PowerFrame', '096'),
+  ('varta-blue-dynamic-60', 'Varta', 'Blue Dynamic 60Ah', 60, 540, 'standard', 242, 175, 190, '0', 13, 30, 'SMF', '065', 48, 64),
+  ('yuasa-ybx1013', 'Yuasa', 'YBX1013 60Ah', 60, 550, 'standard', 242, 175, 190, '0', 13, 36, 'SMF', '065', 50, 66),
+  ('exide-eb620', 'Exide', 'EB620 62Ah', 62, 540, 'standard', 242, 175, 190, '0', 13, 24, 'SMF', '065', 47, 63),
+  ('varta-silver-dynamic-70', 'Varta', 'Silver Dynamic 70Ah', 70, 630, 'standard', 278, 175, 190, '0', 15, 36, 'SMF Enhanced', '096', 58, 74),
+  ('bosch-s4008', 'Bosch', 'S4 008 70Ah', 70, 630, 'standard', 278, 175, 190, '0', 15, 24, 'PowerFrame', '096', 55, 70),
 
   -- EFB start/stop
-  ('varta-blue-dynamic-efb-65', 'Varta', 'Blue Dynamic EFB 65Ah', 65, 600, 'efb', 242, 175, 190, '0', 15, 36, 'EFB', 'EFB065'),
-  ('yuasa-ybx7005', 'Yuasa', 'YBX7005 EFB 65Ah', 65, 620, 'efb', 242, 175, 190, '0', 15, 48, 'EFB', 'EFB065'),
-  ('bosch-s5005', 'Bosch', 'S5 005 EFB 65Ah', 65, 650, 'efb', 242, 175, 190, '0', 15, 36, 'EFB', 'EFB065'),
-  ('varta-blue-dynamic-efb-70', 'Varta', 'Blue Dynamic EFB 70Ah', 70, 680, 'efb', 278, 175, 190, '0', 16, 36, 'EFB', 'EFB096'),
-  ('exide-efb-efb700', 'Exide', 'EFB 700 70Ah', 70, 680, 'efb', 278, 175, 190, '0', 16, 36, 'EFB', 'EFB096'),
-  ('yuasa-ybx7013', 'Yuasa', 'YBX7013 EFB 70Ah', 70, 700, 'efb', 278, 175, 190, '0', 16, 48, 'EFB', 'EFB096'),
+  ('varta-blue-dynamic-efb-65', 'Varta', 'Blue Dynamic EFB 65Ah', 65, 600, 'efb', 242, 175, 190, '0', 15, 36, 'EFB', 'EFB065', 62, 79),
+  ('yuasa-ybx7005', 'Yuasa', 'YBX7005 EFB 65Ah', 65, 620, 'efb', 242, 175, 190, '0', 15, 48, 'EFB', 'EFB065', 65, 82),
+  ('bosch-s5005', 'Bosch', 'S5 005 EFB 65Ah', 65, 650, 'efb', 242, 175, 190, '0', 15, 36, 'EFB', 'EFB065', 60, 77),
+  ('varta-blue-dynamic-efb-70', 'Varta', 'Blue Dynamic EFB 70Ah', 70, 680, 'efb', 278, 175, 190, '0', 16, 36, 'EFB', 'EFB096', 68, 86),
+  ('exide-efb-efb700', 'Exide', 'EFB 700 70Ah', 70, 680, 'efb', 278, 175, 190, '0', 16, 36, 'EFB', 'EFB096', 62, 80),
+  ('yuasa-ybx7013', 'Yuasa', 'YBX7013 EFB 70Ah', 70, 700, 'efb', 278, 175, 190, '0', 16, 48, 'EFB', 'EFB096', 70, 88),
 
   -- AGM premium start/stop + high performance
-  ('varta-silver-dynamic-agm-70', 'Varta', 'Silver Dynamic AGM 70Ah', 70, 760, 'agm', 278, 175, 190, '0', 17, 48, 'AGM', 'AGM096'),
-  ('varta-silver-dynamic-agm-80', 'Varta', 'Silver Dynamic AGM 80Ah', 80, 800, 'agm', 315, 175, 190, '0', 20, 48, 'AGM', 'AGM H7'),
-  ('yuasa-ybx9005', 'Yuasa', 'YBX9005 AGM 70Ah', 70, 760, 'agm', 278, 175, 190, '0', 17, 60, 'AGM VRLA', 'AGM096'),
-  ('bosch-s6005', 'Bosch', 'S6 005 AGM 70Ah', 70, 760, 'agm', 278, 175, 190, '0', 17, 48, 'AGM', 'AGM096'),
-  ('yuasa-ybx9013', 'Yuasa', 'YBX9013 AGM 80Ah', 80, 820, 'agm', 315, 175, 190, '0', 20, 60, 'AGM VRLA', 'AGM H7'),
-  ('varta-silver-dynamic-agm-95', 'Varta', 'Silver Dynamic AGM 95Ah', 95, 850, 'agm', 353, 175, 190, '0', 24, 48, 'AGM', 'AGM H8'),
-  ('bosch-s6013', 'Bosch', 'S6 013 AGM 95Ah', 95, 850, 'agm', 353, 175, 190, '0', 24, 48, 'AGM', 'AGM H8'),
+  ('varta-silver-dynamic-agm-70', 'Varta', 'Silver Dynamic AGM 70Ah', 70, 760, 'agm', 278, 175, 190, '0', 17, 48, 'AGM', 'AGM096', 78, 96),
+  ('varta-silver-dynamic-agm-80', 'Varta', 'Silver Dynamic AGM 80Ah', 80, 800, 'agm', 315, 175, 190, '0', 20, 48, 'AGM', 'AGM H7', 92, 115),
+  ('yuasa-ybx9005', 'Yuasa', 'YBX9005 AGM 70Ah', 70, 760, 'agm', 278, 175, 190, '0', 17, 60, 'AGM VRLA', 'AGM096', 82, 102),
+  ('bosch-s6005', 'Bosch', 'S6 005 AGM 70Ah', 70, 760, 'agm', 278, 175, 190, '0', 17, 48, 'AGM', 'AGM096', 75, 93),
+  ('yuasa-ybx9013', 'Yuasa', 'YBX9013 AGM 80Ah', 80, 820, 'agm', 315, 175, 190, '0', 20, 60, 'AGM VRLA', 'AGM H7', 95, 118),
+  ('varta-silver-dynamic-agm-95', 'Varta', 'Silver Dynamic AGM 95Ah', 95, 850, 'agm', 353, 175, 190, '0', 24, 48, 'AGM', 'AGM H8', 105, 130),
+  ('bosch-s6013', 'Bosch', 'S6 013 AGM 95Ah', 95, 850, 'agm', 353, 175, 190, '0', 24, 48, 'AGM', 'AGM H8', 102, 125),
 
   -- Some reverse polarity examples (1)
-  ('varta-blue-dynamic-60-r', 'Varta', 'Blue Dynamic 60Ah (Rev)', 60, 540, 'standard', 242, 175, 190, '1', 13, 30, 'SMF', '065R'),
-  ('yuasa-ybx1013-r', 'Yuasa', 'YBX1013 60Ah (Rev)', 60, 550, 'standard', 242, 175, 190, '1', 13, 36, 'SMF', '065R'),
+  ('varta-blue-dynamic-60-r', 'Varta', 'Blue Dynamic 60Ah (Rev)', 60, 540, 'standard', 242, 175, 190, '1', 13, 30, 'SMF', '065R', 48, 62),
+  ('yuasa-ybx1013-r', 'Yuasa', 'YBX1013 60Ah (Rev)', 60, 550, 'standard', 242, 175, 190, '1', 13, 36, 'SMF', '065R', 50, 65),
 
   -- Van / larger
-  ('varta-promotive-105', 'Varta', 'Promotive 105Ah', 105, 950, 'standard', 353, 175, 190, '0', 26, 24, 'Commercial', '019'),
-  ('yuasa-ybx5027', 'Yuasa', 'YBX5027 100Ah', 100, 900, 'standard', 353, 175, 190, '0', 25, 36, 'SMF', '019'),
-  ('exide-eg1100', 'Exide', 'EG1100 110Ah', 110, 1000, 'standard', 394, 175, 190, '0', 28, 24, 'SMF', '031'),
+  ('varta-promotive-105', 'Varta', 'Promotive 105Ah', 105, 950, 'standard', 353, 175, 190, '0', 26, 24, 'Commercial', '019', 95, 120),
+  ('yuasa-ybx5027', 'Yuasa', 'YBX5027 100Ah', 100, 900, 'standard', 353, 175, 190, '0', 25, 36, 'SMF', '019', 88, 112),
+  ('exide-eg1100', 'Exide', 'EG1100 110Ah', 110, 1000, 'standard', 394, 175, 190, '0', 28, 24, 'SMF', '031', 105, 135),
 
   -- A couple of higher Ah standard for older large cars
-  ('banner-power-bull-74', 'Banner', 'Power Bull 74Ah', 74, 680, 'standard', 278, 175, 190, '0', 16, 24, 'Calcium', '096'),
-  ('varta-blue-dynamic-74', 'Varta', 'Blue Dynamic 74Ah', 74, 680, 'standard', 278, 175, 190, '0', 16, 30, 'SMF', '096')
+  ('banner-power-bull-74', 'Banner', 'Power Bull 74Ah', 74, 680, 'standard', 278, 175, 190, '0', 16, 24, 'Calcium', '096', 58, 74),
+  ('varta-blue-dynamic-74', 'Varta', 'Blue Dynamic 74Ah', 74, 680, 'standard', 278, 175, 190, '0', 16, 30, 'SMF', '096', 55, 72)
 ON CONFLICT (slug) DO NOTHING;
 
 -- ========== EXPLICIT RECOMMENDATIONS (best matches) ==========

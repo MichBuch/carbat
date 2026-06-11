@@ -85,6 +85,9 @@ export const batteries = pgTable(
     technology: text("technology"), // e.g. "Calcium", "AGM VRLA", "EFB"
     // For grouping / UX
     groupSize: text("group_size"), // e.g. "019", "096", "DIN H7"
+    // Estimated UK retail price range (guide only, £)
+    priceMin: integer("price_min"),
+    priceMax: integer("price_max"),
     slug: text("slug").notNull().unique(),
     active: boolean("active").notNull().default(true),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),

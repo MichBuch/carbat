@@ -51,6 +51,13 @@ export default function BatteryCard({ battery, fit, explicit }: Props) {
         <div className="spec">{battery.warrantyMonths} mo warranty</div>
       </div>
 
+      {/* Price range (guide) */}
+      {(battery as any).priceMin && (battery as any).priceMax && (
+        <div className="mt-2 text-sm font-semibold text-cyan-400">
+          £{(battery as any).priceMin}–£{(battery as any).priceMax} <span className="text-[10px] font-normal text-ink/50">(guide)</span>
+        </div>
+      )}
+
       {/* Fit reasons */}
       <div className="mt-3">
         <div className="text-xs font-semibold uppercase tracking-widest text-emerald-700">Why it fits</div>

@@ -124,7 +124,7 @@ export async function lookupVehicleByReg(reg: string): Promise<LookupResult> {
 
       const sorted = sortBatteriesByFit(withFit)
         .filter((x) => x.fit.fits)
-        .slice(0, 24);
+        .slice(0, 48);
 
       return {
         vehicle,
@@ -213,7 +213,7 @@ export async function lookupVehicleByReg(reg: string): Promise<LookupResult> {
 
       const sorted = sortBatteriesByFit(withFit as any)
         .filter((x: any) => x.fit.fits)
-        .slice(0, 24);
+        .slice(0, 48);
 
       return {
         vehicle: vehicleForFit,

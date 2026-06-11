@@ -1,35 +1,52 @@
 @import "tailwindcss";
 
 @theme {
-  --color-daylight: #fffdf6;
+  --color-daylight: #0f172a;
   --color-sun: #ffd23f;
   --color-citrus: #c7f000;
   --color-emerald: #059669;
   --color-coral: #ff5e5b;
   --color-sky: #0ea5e9;
-  --color-ink: #16130b;
+  --color-ink: #e0f2fe;
+  --color-cyan: #22d3ee;
   --font-display: var(--font-geist-sans), system-ui, sans-serif;
 }
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
+/* Neon sparky dark theme inspired by holdingco */
 body {
-  background:
-    radial-gradient(1200px 600px at 85% -12%, color-mix(in oklch, var(--color-sun) 28%, transparent), transparent),
-    radial-gradient(800px 480px at -8% 8%, color-mix(in oklch, var(--color-emerald) 18%, transparent), transparent),
-    var(--color-daylight);
-  color: var(--color-ink);
+  background: #0f172a;
+  color: #e0f2fe;
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   min-height: 100dvh;
 }
 
-/* Nice utility styles for the battery app */
+/* Subtle neon gradient accents for sparky feel */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(900px 500px at 80% -10%, rgba(34, 211, 238, 0.08), transparent),
+    radial-gradient(700px 400px at 10% 20%, rgba(103, 232, 249, 0.06), transparent);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Nice utility styles for the battery app - neon dark */
 .card {
-  @apply rounded-2xl border border-ink/10 bg-white/70 p-5 backdrop-blur transition hover:border-ink/20;
+  @apply rounded-2xl border border-cyan-700/30 bg-slate-800/80 p-5 backdrop-blur transition;
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.08);
+}
+
+.card:hover {
+  @apply border-cyan-500/60;
+  box-shadow: 0 0 35px rgba(34, 211, 238, 0.18);
 }
 
 .pill {
@@ -37,29 +54,45 @@ body {
 }
 
 .badge-fit {
-  @apply bg-emerald-600 text-white;
+  @apply bg-cyan-500 text-slate-950;
 }
 
 .badge-warn {
-  @apply bg-amber-500 text-white;
+  @apply bg-amber-400 text-slate-950;
 }
 
 .input {
-  @apply w-full rounded-xl border border-ink/20 bg-white px-4 py-3 text-lg placeholder:text-ink/40 focus:border-emerald-600 focus:outline-none;
+  @apply w-full rounded-xl border border-cyan-700/40 bg-slate-900 px-4 py-3 text-lg placeholder:text-cyan-300/40 focus:border-cyan-400 focus:outline-none;
+  box-shadow: inset 0 0 8px rgba(34, 211, 238, 0.08);
 }
 
 .btn-primary {
-  @apply rounded-full bg-ink px-6 py-3 font-semibold text-daylight transition hover:bg-emerald-600 active:scale-[0.985];
+  @apply rounded-full bg-cyan-400 px-6 py-3 font-semibold text-slate-950 transition hover:bg-cyan-300 active:scale-[0.985];
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.35);
 }
 
 .btn-secondary {
-  @apply rounded-full border border-ink/20 px-5 py-2 font-semibold hover:border-emerald-600 hover:text-emerald-600;
+  @apply rounded-full border border-cyan-700/40 px-5 py-2 font-semibold text-cyan-100 hover:border-cyan-400 hover:text-cyan-300;
 }
 
 .spec {
-  @apply rounded-lg bg-ink/5 px-3 py-1 text-sm font-medium;
+  @apply rounded-lg bg-slate-700/60 px-3 py-1 text-sm font-medium text-cyan-200;
 }
 
 .disclaimer {
-  @apply rounded-2xl border border-amber-500/30 bg-amber-50 p-4 text-sm text-amber-900;
+  @apply rounded-2xl border border-amber-400/40 bg-amber-950/60 p-4 text-sm text-amber-200;
+}
+
+/* Neon utility classes for sparky feel */
+.neon-card {
+  box-shadow: 0 0 25px rgba(34, 211, 238, 0.1);
+}
+.neon-card:hover {
+  box-shadow: 0 0 40px rgba(34, 211, 238, 0.22);
+}
+.neon-btn {
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.3);
+}
+.neon-input {
+  box-shadow: inset 0 0 8px rgba(34, 211, 238, 0.1);
 }
